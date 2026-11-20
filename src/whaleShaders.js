@@ -26,7 +26,7 @@ void main() {
   p.z += sin(uTime * 1.35 + aSeed * 19.0) * 0.012 * motion;
   vec4 mv = modelViewMatrix * vec4(p, 1.0);
   gl_Position = projectionMatrix * mv;
-  gl_PointSize = max(1.0, aSize * uPixelRatio * (34.0 / max(1.0, -mv.z)));
+  gl_PointSize = max(1.0, aSize * uPixelRatio * (42.0 / max(1.0, -mv.z)));
   float pulse = 0.90 + 0.10 * sin(uTime * 1.4 + aSeed * 8.0);
   vColor = aBaseColor * pulse;
   vAlpha = 0.84 + 0.16 * pulse;
@@ -40,7 +40,7 @@ void main() {
   if (d > 0.5) discard;
   float core = 1.0 - smoothstep(0.04, 0.30, d);
   float halo = 1.0 - smoothstep(0.18, 0.50, d);
-  gl_FragColor = vec4(vColor * (0.78 + core * 0.75), (halo * 0.60 + core * 0.40) * vAlpha);
+  gl_FragColor = vec4(vColor * (0.92 + core * 0.90), (halo * 0.58 + core * 0.58) * vAlpha);
   #include <tonemapping_fragment>
   #include <colorspace_fragment>
 }`;
@@ -65,7 +65,7 @@ void main() {
   float d = length(gl_PointCoord - 0.5);
   if (d > 0.5) discard;
   float a = (1.0 - smoothstep(0.05, 0.5, d)) * vOpacity;
-  gl_FragColor = vec4(0.10, 0.58, 1.0, a);
+  gl_FragColor = vec4(0.38, 0.78, 0.96, a * 0.52);
   #include <tonemapping_fragment>
   #include <colorspace_fragment>
 }`;
