@@ -38,7 +38,6 @@ async function init() {
       bodyColor: "#087fca",
       highlightColor: "#8beeff",
       bellyColor: "#27cfff",
-      pointScale: 1.0,
       tailSwing: 0.20,
       waveAmplitude: 0.11,
       glow: 0.42
@@ -54,7 +53,6 @@ async function init() {
     document.querySelector("#bellyColor").addEventListener("input", e => whale.setColors({ belly: e.target.value }));
     document.querySelector("#tailSwing").addEventListener("input", e => whale.material.uniforms.uTailSwing.value = Number(e.target.value));
     document.querySelector("#glow").addEventListener("input", e => whale.material.uniforms.uGlow.value = Number(e.target.value));
-    document.querySelector("#pointScale").addEventListener("input", e => whale.material.uniforms.uPointScale.value = Number(e.target.value));
   } catch (error) {
     console.error("Whale particle initialisation failed:", error);
     mount.innerHTML = '<p class="error">Unable to initialise the whale particle scene. Check WebGL support.</p>';
