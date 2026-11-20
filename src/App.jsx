@@ -1,6 +1,3 @@
-import { useState } from "react";
-import "./index.css";
-
 const ORIGINAL = { deep: "#075da8", mid: "#078bd0", glow: "#28caff" };
 
 function Whale({ colors }) {
@@ -31,62 +28,9 @@ function Whale({ colors }) {
 }
 
 export default function App() {
-  const [colors, setColors] = useState(ORIGINAL);
-  const update = (key, value) => setColors(current => ({ ...current, [key]: value }));
-  const reset = () => setColors(ORIGINAL);
-
   return (
-    <main className="app-shell">
-      <header className="topbar">
-        <div className="brand">
-          <span className="brand-mark">◉</span>
-          <span>PELAGIC<span className="brand-light"> / PARTICLE STUDY</span></span>
-        </div>
-        <span className="status"><i /> LIVE PREVIEW</span>
-      </header>
-
-      <section className="hero">
-        <div className="eyebrow">01 — FORM STUDY</div>
-        <h1>Deep blue, <em>reimagined.</em></h1>
-        <p className="intro">A particle-built whale silhouette. Tune its colour palette without changing the geometry or particle size.</p>
-
-        <div className="visual-stage" style={{
-          "--whale-deep": colors.deep,
-          "--whale-mid": colors.mid,
-          "--whale-glow": colors.glow
-        }}>
-          <div className="stage-label">SPECIMEN / 001</div>
-          <Whale colors={colors} />
-          <div className="stage-footer"><span>HUMPBACK WHALE</span><span>1280 × 427 GEOMETRY</span></div>
-        </div>
-
-        <section className="controls">
-          <div className="controls-heading">
-            <div>
-              <div className="eyebrow">02 — COLOUR SYSTEM</div>
-              <h2>Make it yours.</h2>
-            </div>
-            <button className="reset-button" onClick={reset}>↺ Restore original</button>
-          </div>
-          <div className="palette">
-            {[
-              ["deep", "Abyss blue", "Dorsal / shadow"],
-              ["mid", "Ocean blue", "Main body"],
-              ["glow", "Bioluminescent", "Highlights"]
-            ].map(([key, label, note]) => (
-              <label className="colour-control" key={key}>
-                <span className="colour-swatch" style={{ background: colors[key] }}>
-                  <input aria-label={label + " colour"} type="color" value={colors[key]} onChange={e => update(key, e.target.value)} />
-                </span>
-                <span className="colour-copy"><strong>{label}</strong><small>{note}</small></span>
-                <code>{colors[key].toUpperCase()}</code>
-              </label>
-            ))}
-          </div>
-          <p className="hint">Select any colour swatch to open the colour picker. The particle layout and dot diameter stay fixed.</p>
-        </section>
-      </section>
-      <footer className="footer"><span>PARTICLE GEOMETRY / STATIC DOT DIAMETER</span><span>BUILT FOR EXPERIMENTATION ↗</span></footer>
+    <main className="whale-page">
+      <Whale colors={ORIGINAL} />
     </main>
   );
 }
