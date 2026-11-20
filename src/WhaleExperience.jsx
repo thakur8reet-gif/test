@@ -17,13 +17,13 @@ function particleGeometry(image, spacing = 6) {
     const i = (y * canvas.width + x) * 4;
     const r = pixels[i] / 255, g = pixels[i + 1] / 255, b = pixels[i + 2] / 255;
     const alpha = pixels[i + 3] / 255, brightness = Math.max(r, g, b);
-    if (alpha < .1 || brightness < .075 || b - Math.max(r, g) * .52 < .025) continue;
+    if (alpha < .1 || brightness < .12) continue;
     const nx = x / canvas.width, ny = y / canvas.height;
     const px = (nx - .5) * worldWidth, py = (.5 - ny) * worldHeight;
     const depth = .12 + brightness * .22 + Math.sin((nx * 1.15 + .08) * Math.PI) * .12 + Math.cos(ny * Math.PI * 2) * .035;
     const seed = ((x * 73856093) ^ (y * 19349663)) >>> 0, rand = (seed % 10000) / 10000;
     positions.push(px, py, depth);
-    colors.push(Math.min(1, .10 + r * .35), Math.min(1, .48 + g * .42), Math.min(1, .72 + b * .28));
+    colors.push(Math.min(1, .68 + r * .32), Math.min(1, .78 + g * .22), Math.min(1, .86 + b * .14));
     sizes.push(2 + brightness * 2.15 + rand * .45);
     seeds.push(rand);
   }
@@ -60,7 +60,7 @@ export default function WhaleExperience() {
     let disposed = false;
     const clock = new THREE.Clock(), pointer = { x: 0, y: 0 }, target = { x: 0, y: 0 };
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const scene = new THREE.Scene(); scene.background = new THREE.Color('#02060b');
+    const scene = new THREE.Scene(); scene.background = new THREE.Color('#02070d');
     const camera = new THREE.PerspectiveCamera(34, 1, .1, 100); camera.position.set(0, 0, 18);
     try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'high-performance' }); }
     catch { mount.innerHTML = '<div class="webgl-fallback">WebGL could not be initialised in this browser.</div>'; return; }
@@ -71,7 +71,7 @@ export default function WhaleExperience() {
     const image = new Image(); image.src = whaleImageUrl;
     image.onload = () => {
       if (disposed) return;
-      const result = particleGeometry(image, innerWidth < 700 ? 7 : 6); whaleGeo = result.geometry;
+      const result = particleGeometry(image, innerWidth < 700 ? 6 : 5); whaleGeo = result.geometry;
       whaleMaterial = new THREE.ShaderMaterial({
         uniforms: { uTime: { value: 0 }, uPixelRatio: { value: renderer.getPixelRatio() }, uReducedMotion: { value: reduced ? 1 : 0 } },
         vertexShader: whaleVertexShader, fragmentShader: whaleFragmentShader,
@@ -92,8 +92,8 @@ export default function WhaleExperience() {
       if (!reduced) blink = gsap.timeline({ repeat: -1, repeatDelay: 4.25 })
         .to(eye.scale, { y: .08, duration: .09, ease: 'power2.in' })
         .to(eye.scale, { y: 1, duration: .14, ease: 'power2.out' });
-      whaleGroup.scale.setScalar(.985);
-      gsap.to(whaleGroup.scale, { x: 1, y: 1, z: 1, duration: 1.6, ease: 'power2.out' });
+      whaleGroup.scale.set(.985, 1.32, .985);
+      gsap.to(whaleGroup.scale, { x: 1, y: 1.32, z: 1, duration: 1.6, ease: 'power2.out' });
       mount.classList.add('is-ready'); mount.dataset.particleCount = String(result.count);
     };
     image.onerror = () => { mount.innerHTML = '<div class="webgl-fallback">Whale artwork could not be loaded.</div>'; };
