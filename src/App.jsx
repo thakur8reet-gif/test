@@ -1,0 +1,97 @@
+import { useState } from "react";
+import "./index.css";
+
+const ORIGINAL = { deep: "#075da8", mid: "#078bd0", glow: "#28caff" };
+
+function Whale({ colors }) {
+  return (
+    <svg className="whale" viewBox="0 0 1280 427" role="img" aria-label="Glowing blue particle whale">
+      <defs>
+        <clipPath id="whale-silhouette">
+          <path d="M100.0,120.0 L99.0,135.0 L122.0,170.0 L179.0,219.0 L185.0,219.0 L209.0,239.0 L217.0,241.0 L222.0,246.0 L231.0,247.0 L236.0,254.0 L245.0,254.0 L250.0,261.0 L261.0,263.0 L266.0,268.0 L279.0,269.0 L287.0,275.0 L324.0,284.0 L329.0,289.0 L352.0,291.0 L358.0,297.0 L373.0,297.0 L379.0,303.0 L407.0,304.0 L414.0,303.0 L419.0,297.0 L430.0,297.0 L443.0,308.0 L448.0,319.0 L471.0,346.0 L491.0,358.0 L499.0,359.0 L506.0,367.0 L516.0,367.0 L528.0,374.0 L557.0,374.0 L558.0,366.0 L530.0,346.0 L527.0,338.0 L516.0,326.0 L514.0,317.0 L509.0,313.0 L505.0,296.0 L511.0,289.0 L528.0,289.0 L533.0,283.0 L549.0,282.0 L549.0,269.0 L557.0,261.0 L551.0,257.0 L548.0,246.0 L560.0,236.0 L568.0,236.0 L571.0,239.0 L572.0,232.0 L577.0,226.0 L588.0,225.0 L593.0,232.0 L605.0,231.0 L613.0,236.0 L617.0,247.0 L612.0,253.0 L607.0,253.0 L607.0,268.0 L612.0,261.0 L635.0,261.0 L644.0,253.0 L670.0,254.0 L671.0,244.0 L680.0,238.0 L712.0,239.0 L717.0,230.0 L740.0,232.0 L745.0,226.0 L768.0,225.0 L773.0,219.0 L790.0,219.0 L805.0,211.0 L818.0,212.0 L827.0,204.0 L853.0,204.0 L860.0,200.0 L875.0,204.0 L886.0,198.0 L903.0,197.0 L893.0,186.0 L894.0,180.0 L902.0,175.0 L917.0,174.0 L926.0,180.0 L927.0,186.0 L923.0,197.0 L943.0,196.0 L952.0,204.0 L985.0,204.0 L994.0,211.0 L1039.0,211.0 L1044.0,217.0 L1043.0,232.0 L1059.0,233.0 L1064.0,238.0 L1073.0,232.0 L1095.0,232.0 L1118.0,254.0 L1119.0,261.0 L1160.0,306.0 L1169.0,309.0 L1176.0,318.0 L1185.0,319.0 L1190.0,325.0 L1204.0,325.0 L1204.0,317.0 L1201.0,317.0 L1190.0,304.0 L1190.0,296.0 L1182.0,288.0 L1182.0,253.0 L1165.0,234.0 L1169.0,217.0 L1138.0,216.0 L1133.0,210.0 L1126.0,209.0 L1113.0,196.0 L1105.0,195.0 L1084.0,174.0 L1076.0,173.0 L1071.0,167.0 L1062.0,166.0 L1058.0,161.0 L1048.0,159.0 L1037.0,152.0 L1028.0,152.0 L1016.0,145.0 L999.0,144.0 L995.0,139.0 L972.0,139.0 L960.0,132.0 L869.0,133.0 L860.0,126.0 L860.0,111.0 L853.0,109.0 L831.0,110.0 L810.0,117.0 L789.0,119.0 L785.0,123.0 L760.0,126.0 L747.0,133.0 L726.0,133.0 L717.0,139.0 L669.0,140.0 L656.0,146.0 L564.0,147.0 L558.0,150.0 L469.0,148.0 L457.0,145.0 L414.0,147.0 L400.0,139.0 L338.0,140.0 L329.0,132.0 L310.0,132.0 L301.0,125.0 L211.0,125.0 L194.0,118.0 L160.0,118.0 L151.0,112.0 L143.0,113.0 L137.0,110.0 L108.0,110.0 Z" />
+        </clipPath>
+        <pattern id="particle-grid" width="7" height="7" patternUnits="userSpaceOnUse">
+          <circle cx="3.5" cy="3.5" r="1.8" fill="url(#particle-color)" />
+        </pattern>
+        <linearGradient id="particle-color" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor={colors.glow} />
+          <stop offset="32%" stopColor={colors.mid} />
+          <stop offset="100%" stopColor={colors.deep} />
+        </linearGradient>
+        <linearGradient id="belly-glow" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={colors.glow} stopOpacity="0" />
+          <stop offset="100%" stopColor={colors.glow} stopOpacity=".38" />
+        </linearGradient>
+        <filter id="soft-glow" x="-20%" y="-30%" width="140%" height="160%">
+          <feGaussianBlur stdDeviation="2.8" />
+        </filter>
+      </defs>
+      <g clipPath="url(#whale-silhouette)">
+        <rect width="1280" height="427" fill="url(#particle-grid)" />
+        <rect width="1280" height="427" fill="url(#belly-glow)" />
+        <rect width="1280" height="427" fill="url(#particle-grid)" opacity=".28" filter="url(#soft-glow)" />
+      </g>
+    </svg>
+  );
+}
+
+export default function App() {
+  const [colors, setColors] = useState(ORIGINAL);
+  const update = (key, value) => setColors(current => ({ ...current, [key]: value }));
+  const reset = () => setColors(ORIGINAL);
+
+  return (
+    <main className="app-shell">
+      <header className="topbar">
+        <div className="brand">
+          <span className="brand-mark">◉</span>
+          <span>PELAGIC<span className="brand-light"> / PARTICLE STUDY</span></span>
+        </div>
+        <span className="status"><i /> LIVE PREVIEW</span>
+      </header>
+
+      <section className="hero">
+        <div className="eyebrow">01 — FORM STUDY</div>
+        <h1>Deep blue, <em>reimagined.</em></h1>
+        <p className="intro">A particle-built whale silhouette. Tune its colour palette without changing the geometry or particle size.</p>
+
+        <div className="visual-stage" style={{
+          "--whale-deep": colors.deep,
+          "--whale-mid": colors.mid,
+          "--whale-glow": colors.glow
+        }}>
+          <div className="stage-label">SPECIMEN / 001</div>
+          <Whale colors={colors} />
+          <div className="stage-footer"><span>HUMPBACK WHALE</span><span>1280 × 427 GEOMETRY</span></div>
+        </div>
+
+        <section className="controls">
+          <div className="controls-heading">
+            <div>
+              <div className="eyebrow">02 — COLOUR SYSTEM</div>
+              <h2>Make it yours.</h2>
+            </div>
+            <button className="reset-button" onClick={reset}>↺ Restore original</button>
+          </div>
+          <div className="palette">
+            {[
+              ["deep", "Abyss blue", "Dorsal / shadow"],
+              ["mid", "Ocean blue", "Main body"],
+              ["glow", "Bioluminescent", "Highlights"]
+            ].map(([key, label, note]) => (
+              <label className="colour-control" key={key}>
+                <span className="colour-swatch" style={{ background: colors[key] }}>
+                  <input aria-label={label + " colour"} type="color" value={colors[key]} onChange={e => update(key, e.target.value)} />
+                </span>
+                <span className="colour-copy"><strong>{label}</strong><small>{note}</small></span>
+                <code>{colors[key].toUpperCase()}</code>
+              </label>
+            ))}
+          </div>
+          <p className="hint">Select any colour swatch to open the colour picker. The particle layout and dot diameter stay fixed.</p>
+        </section>
+      </section>
+      <footer className="footer"><span>PARTICLE GEOMETRY / STATIC DOT DIAMETER</span><span>BUILT FOR EXPERIMENTATION ↗</span></footer>
+    </main>
+  );
+}
