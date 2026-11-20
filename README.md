@@ -48,3 +48,6 @@ whale.material.uniforms.uPointScale.value = 1.25;
 - `src/style.css`: minimal dark presentation.
 
 This is an image-derived 2.5D point cloud, not a full anatomical 3D scan. The data is kept separate from the renderer so future features can be added without repeating the extraction.
+
+## Particle size
+The dot diameter is fixed at 1.55× the previous rendering size to match the supplied reference image. The size multiplier is hard-coded in the vertex shader and is not exposed as a runtime uniform, option, or UI control.
