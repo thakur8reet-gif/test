@@ -132,6 +132,5 @@ export default function WhaleExperience() {
   return <section className="whale-stage" aria-label="Animated blue whale particle sculpture">
     <div className="stage-grain" aria-hidden="true"/>
     <div className="whale-canvas" ref={mountRef}/>
-    <div className="stage-caption"><span className="caption-dot"/> LIVE PARTICLE STUDY <span className="caption-divider">/</span> CETACEA 001</div>
   </section>;
 }
