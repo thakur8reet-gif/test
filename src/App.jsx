@@ -13,14 +13,10 @@ function Whale({ colors }) {
         <pattern id="particle-grid" width="7" height="7" patternUnits="userSpaceOnUse">
           <circle cx="3.5" cy="3.5" r="1.8" fill="url(#particle-color)" />
         </pattern>
-        <linearGradient id="particle-color" x1="0" y1="0" x2="1" y2="0">
+        <linearGradient id="particle-color" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1280" y2="0">
           <stop offset="0%" stopColor={colors.glow} />
           <stop offset="32%" stopColor={colors.mid} />
           <stop offset="100%" stopColor={colors.deep} />
-        </linearGradient>
-        <linearGradient id="belly-glow" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={colors.glow} stopOpacity="0" />
-          <stop offset="100%" stopColor={colors.glow} stopOpacity=".38" />
         </linearGradient>
         <filter id="soft-glow" x="-20%" y="-30%" width="140%" height="160%">
           <feGaussianBlur stdDeviation="2.8" />
@@ -28,7 +24,6 @@ function Whale({ colors }) {
       </defs>
       <g clipPath="url(#whale-silhouette)">
         <rect width="1280" height="427" fill="url(#particle-grid)" />
-        <rect width="1280" height="427" fill="url(#belly-glow)" />
         <rect width="1280" height="427" fill="url(#particle-grid)" opacity=".28" filter="url(#soft-glow)" />
       </g>
     </svg>
