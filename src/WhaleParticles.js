@@ -34,7 +34,6 @@ export async function createWhaleGeometry() {
 const vertexShader = /* glsl */ `
 uniform float uTime;
 uniform float uPixelRatio;
-uniform float uPointScale;
 uniform float uTailSwing;
 uniform float uWaveAmplitude;
 uniform float uAnimate;
@@ -67,7 +66,7 @@ void main() {
 
   vec4 mv = modelViewMatrix * vec4(p, 1.0);
   gl_Position = projectionMatrix * mv;
-  gl_PointSize = max(1.0, aSize * uPointScale * uPixelRatio * (18.0 / max(1.0, -mv.z)));
+  gl_PointSize = max(1.0, aSize * 1.55 * uPixelRatio * (18.0 / max(1.0, -mv.z)));
   vBrightness = aBrightness; vBelly = aBellyWeight; vSeed = aSeed;
 }`;
 
@@ -100,7 +99,6 @@ export function createWhaleMaterial(options = {}) {
     uniforms: {
       uTime: { value: 0 },
       uPixelRatio: { value: Math.min(window.devicePixelRatio || 1, 2) },
-      uPointScale: { value: options.pointScale ?? 1 },
       uTailSwing: { value: options.tailSwing ?? 0.20 },
       uWaveAmplitude: { value: options.waveAmplitude ?? 0.11 },
       uAnimate: { value: options.animate === false ? 0 : 1 },
